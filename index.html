@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dogecoin Price Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+        h1 {
+            color: #ff9800;
+        }
+        .price {
+            font-size: 2em;
+            color: #333;
+        }
+        .refresh-button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dogecoin Price Tracker</h1>
+        <p>Current Price (USD):</p>
+        <p class="price" id="dogePrice">Loading...</p>
+        <button class="refresh-button" onclick="fetchDogePrice()">Refresh Price</button>
+    </div>
+
+    <script>
+        async function fetchDogePrice() {
+            try {
+                // Fetch Dogecoin price from a cryptocurrency API
+                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd');
+                const data = await response.json();
+                const price = data.dogecoin.usd;
+
+                // Display the price
+                document.getElementById('dogePrice').innerText = `$${price}`;
+            } catch (error) {
+                document.getElementById('dogePrice').innerText = "Error fetching price";
+                console.error("Error fetching Dogecoin price:", error);
+            }
+        }
+
+        // Fetch the price when the page loads
+        fetchDogePrice();
+    </script>
+</body>
+</html>
