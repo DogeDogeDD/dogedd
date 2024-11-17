@@ -62,7 +62,8 @@
             async function fetchDogePrice() {
                 try {
                     // Fetch Dogecoin price from a cryptocurrency API
-                    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd');
+                    // const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd');
+                    const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=DOGEUSDT');
                     const data = await response.json();
                     const price = data.dogecoin.usd;
 
